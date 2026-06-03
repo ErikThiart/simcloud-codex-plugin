@@ -1,0 +1,47 @@
+{
+  "name": "simcloud",
+  "version": "0.1.0",
+  "description": "Use the SIMcloud MCP server and API for SMS, airtime, data, electricity, balance, and network lookup workflows.",
+  "author": {
+    "name": "SIMcloud",
+    "email": "customercare@freepaid.co.za",
+    "url": "https://simcloud.co.za"
+  },
+  "homepage": "https://simcloud.co.za/api/ai.html",
+  "repository": "https://github.com/ErikThiart/simcloud-codex-plugin",
+  "license": "MIT",
+  "keywords": [
+    "simcloud",
+    "mcp",
+    "sms",
+    "airtime",
+    "data",
+    "electricity",
+    "south-africa"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "SIMcloud",
+    "shortDescription": "Use SIMcloud inside Codex",
+    "longDescription": "Connect Codex to the live SIMcloud MCP server and use SIMcloud balance, network lookup, SMS, airtime, data, and electricity capabilities through your own authenticated SIMcloud account.",
+    "developerName": "SIMcloud",
+    "category": "Business",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "websiteURL": "https://simcloud.co.za/api/ai.html",
+    "privacyPolicyURL": "https://simcloud.co.za/legal.php",
+    "termsOfServiceURL": "https://simcloud.co.za/legal.php",
+    "defaultPrompt": [
+      "Connect my SIMcloud account and check my wallet balance",
+      "Use SIMcloud to send an SMS and then check its delivery status",
+      "Create a SIMcloud airtime, data, or electricity order for me"
+    ],
+    "brandColor": "#0F766E",
+    "composerIcon": "./assets/simcloud-small.svg",
+    "logo": "./assets/simcloud.svg",
+    "screenshots": []
+  }
+}

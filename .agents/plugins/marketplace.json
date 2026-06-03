@@ -1,0 +1,20 @@
+{
+  "name": "simcloud",
+  "interface": {
+    "displayName": "SIMcloud"
+  },
+  "plugins": [
+    {
+      "name": "simcloud",
+      "source": {
+        "source": "local",
+        "path": "./plugins/simcloud"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Business"
+    }
+  ]
+}

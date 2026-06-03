@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 120" role="img" aria-labelledby="title">
+  <title>SIMcloud</title>
+  <rect width="320" height="120" rx="16" fill="#ffffff"/>
+  <path d="M50 56c4.2-16.5 18.8-27 35.9-27 14.2 0 26.6 8 32.4 20.3 12.3 2.6 21.2 13.4 21.2 26.3 0 14.7-12.1 26.4-27.1 26.4H56.3C39.6 102 26.5 89.8 26.5 74.8c0-12.8 9.8-23.7 23.5-26.5z" fill="#0f766e"/>
+  <path d="M61 69h47v11H61zM61 86h33v11H61z" fill="#ffffff"/>
+  <text x="160" y="75" font-family="Arial, Helvetica, sans-serif" font-size="32" font-weight="700" fill="#0f172a">SIMcloud</text>
+</svg>
