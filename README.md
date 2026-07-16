@@ -1,6 +1,6 @@
 # SIMcloud Codex Plugin
 
-Connect [SIMcloud](https://simcloud.co.za) to Codex and use AI to work with **SMS, airtime, data bundles, prepaid electricity, wallet balance, and network lookup** through your own authenticated SIMcloud account.
+Connect [SIMcloud](https://simcloud.co.za) to Codex and use AI to work with **South African airtime, data bundles, SMS, VAS vouchers, prepaid electricity, wallet balance, and network lookup** through your own authenticated SIMcloud account.
 
 This repository provides a **public Codex plugin** for the live SIMcloud MCP server. It is designed for both:
 
@@ -16,6 +16,8 @@ The SIMcloud Codex Plugin helps Codex connect to the live SIMcloud platform so i
 - sending SMS messages
 - creating airtime recharges
 - creating data bundle recharges
+- listing VAS products and creating voucher orders
+- checking prepaid electricity meter support
 - creating prepaid electricity orders
 - checking the status of existing SMS and order requests
 
@@ -51,6 +53,7 @@ The current plugin is designed around the SIMcloud capabilities exposed through 
 - **SMS**
 - **Airtime**
 - **Data**
+- **VAS Vouchers**
 - **Prepaid Electricity**
 
 ## Who This Is For
@@ -82,6 +85,8 @@ At a high level:
 2. Codex uses the SIMcloud MCP endpoint where supported.
 3. SIMcloud maps the OAuth token to the user’s own SIMcloud API token internally.
 4. Tool calls run against that user’s own SIMcloud wallet, permissions, and account context.
+
+The hosted MCP server uses HTTPS JSON-RPC at the configured remote URL. It is not a local `stdio` server and does not use SSE.
 
 ## Installation
 
@@ -133,6 +138,10 @@ Use SIMcloud to send an SMS to +27821234567 and then check the delivery status.
 Create a SIMcloud airtime, data, or electricity order using my connected account.
 ```
 
+```text
+List the VAS vouchers available from SIMcloud and help me choose one.
+```
+
 ### For developers
 
 ```text
@@ -142,6 +151,30 @@ Read the SIMcloud plugin and help me build a SaaS feature that uses SIMcloud SMS
 ```text
 Use the SIMcloud OpenAPI and MCP setup to scaffold a SIMcloud integration for my app.
 ```
+
+## Tools
+
+The live SIMcloud MCP server exposes these tools:
+
+- `get_wallet_balance`
+- `lookup_network`
+- `send_sms`
+- `get_sms_status`
+- `create_airtime_order`
+- `get_airtime_order`
+- `list_data_products`
+- `create_data_order`
+- `get_data_order`
+- `list_vas_products`
+- `create_vas_order`
+- `get_vas_order`
+- `check_electricity_meter`
+- `create_electricity_order`
+- `get_electricity_order`
+
+Tools that send messages or spend wallet funds require confirmed transaction details. Do not automatically retry an ambiguous create result; query its status first.
+
+Maintainers can use the [selection prompt set](plugins/simcloud/skills/simcloud/references/golden-prompts.md) to check direct, indirect, negative, and transaction-safety behavior after metadata changes.
 
 ## Important Endpoints
 
@@ -185,7 +218,9 @@ This plugin is meant to support practical SIMcloud workflows, including:
 - SIMcloud SMS automation
 - prepaid airtime integration
 - prepaid data bundle workflows
+- VAS voucher catalogue and ordering workflows
 - prepaid electricity ordering
+- prepaid electricity meter support checks
 - wallet balance checks
 - South African mobile network lookups
 - AI-assisted customer support flows
@@ -198,6 +233,8 @@ This plugin is meant to support practical SIMcloud workflows, including:
 - Do not assume shared credentials.
 - Handle duplicate airtime and data requests correctly.
 - Handle insufficient balance, validation failures, and asynchronous order flows explicitly.
+- Confirm recipient and transaction details before sending messages or spending wallet funds.
+- Query an ambiguous create result before considering any retry.
 
 ## Support
 
