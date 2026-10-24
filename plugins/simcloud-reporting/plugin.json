@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "simcloud-reporting",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Read your SIMcloud balance, transaction history and existing order status.",
   "author": {
     "name": "SIMcloud",
@@ -25,7 +25,7 @@
         "shortDescription": "Account reports and status",
         "longDescription": "Read wallet balance, transaction history and existing airtime, data, SMS, VAS and prepaid electricity order status from your connected SIMcloud account. Useful for South African account holders and support teams checking their own account activity. History can be filtered by service and queried in date ranges of up to 90 days, with pagination. This reporting connection cannot buy products, spend funds, send messages, register accounts or change account data. Voucher redemption codes and electricity recharge PINs are excluded. An existing SIMcloud account and OAuth connection are required. Results reflect the latest stored account information; queued or pending orders do not confirm delivery.",
         "developerName": "SIMcloud",
-        "category": "Business",
+        "category": "Productivity",
         "capabilities": [
           "Read wallet balance",
           "Read transaction history",
