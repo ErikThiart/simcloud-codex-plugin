@@ -245,3 +245,9 @@ This plugin is meant to support practical SIMcloud workflows, including:
 ## License
 
 This project is released under the MIT License. See [LICENSE](LICENSE).
+
+## ChatGPT public reporting plugin
+
+A separate [reporting package](plugins/simcloud-reporting/plugin.json) is being prepared for the public ChatGPT directory. It reads wallet balance, transaction history and existing order/SMS status through a dedicated OAuth reporting connection. It cannot purchase products, send messages, register accounts or return redemption codes.
+
+Run `python3 scripts/package_reporting.py` to build its submission ZIP. See [publication status and remaining review requirements](docs/reporting-publication.md). A built ZIP or a deployed endpoint does not mean the directory submission has been approved or published.

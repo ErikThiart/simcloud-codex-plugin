@@ -1,0 +1,28 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
+  "mcpServers": {
+    "simcloud-reporting": {
+      "type": "streamable-http",
+      "url": "https://simcloud.co.za/api/reporting-mcp.php",
+      "extensions": {
+        "com.openai": {
+          "auth": {
+            "type": "oauth",
+            "client": {
+              "mode": "dcr"
+            },
+            "resource": "https://simcloud.co.za/api/reporting-mcp.php",
+            "authorizationServerBase": "https://simcloud.co.za",
+            "registrationUrl": "https://simcloud.co.za/oauth/register.php",
+            "baseScopes": [
+              "reports:read"
+            ],
+            "defaultScopes": [
+              "reports:read"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

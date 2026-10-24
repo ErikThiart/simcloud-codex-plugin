@@ -1,0 +1,107 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "simcloud-reporting",
+  "version": "1.0.0",
+  "description": "Read your SIMcloud balance, transaction history and existing order status.",
+  "author": {
+    "name": "SIMcloud",
+    "email": "customercare@freepaid.co.za",
+    "url": "https://simcloud.co.za"
+  },
+  "homepage": "https://simcloud.co.za/chatgpt-reporting.php",
+  "repository": "https://github.com/ErikThiart/simcloud-codex-plugin",
+  "license": "MIT",
+  "keywords": [
+    "simcloud",
+    "south-africa",
+    "account-reporting",
+    "transaction-history",
+    "order-status"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "SIMcloud",
+        "shortDescription": "Account reports and status",
+        "longDescription": "Read wallet balance, transaction history and existing airtime, data, SMS, VAS and prepaid electricity order status from your connected SIMcloud account. Useful for South African account holders and support teams checking their own account activity. History can be filtered by service and queried in date ranges of up to 90 days, with pagination. This reporting connection cannot buy products, spend funds, send messages, register accounts or change account data. Voucher redemption codes and electricity recharge PINs are excluded. An existing SIMcloud account and OAuth connection are required. Results reflect the latest stored account information; queued or pending orders do not confirm delivery.",
+        "developerName": "SIMcloud",
+        "category": "Business",
+        "capabilities": [
+          "Read wallet balance",
+          "Read transaction history",
+          "Read existing order status"
+        ],
+        "websiteURL": "https://simcloud.co.za/chatgpt-reporting.php",
+        "supportURL": "https://simcloud.co.za/chatgpt-reporting.php#support",
+        "privacyPolicyURL": "https://simcloud.co.za/chatgpt-reporting-privacy.php",
+        "termsOfServiceURL": "https://simcloud.co.za/legal.php",
+        "defaultPrompt": [
+          "Check my SIMcloud wallet balance.",
+          "Show my SIMcloud transaction history for the last seven days.",
+          "Help me check the status of an existing SIMcloud order."
+        ],
+        "brandColor": "#0F766E",
+        "composerIcon": "./assets/simcloud.svg",
+        "logo": "./assets/simcloud.svg"
+      },
+      "review": {
+        "commerce": false,
+        "commerce_description": "This plugin reads existing account records only. It cannot create purchases, spend wallet funds, initiate checkout, send messages or register users.",
+        "test_cases": {
+          "positive": [
+            {
+              "description": "Read wallet balance",
+              "prompt": "Check my SIMcloud wallet balance.",
+              "tools_triggered": "get_wallet_balance",
+              "expected_behavior": "Return the connected review account balance in rand and its stored update time. Do not transfer funds."
+            },
+            {
+              "description": "Read transaction history",
+              "prompt": "Show my SIMcloud transactions from 1 October 2026 to 24 October 2026.",
+              "tools_triggered": "get_transaction_history",
+              "expected_behavior": "Use 2026-10-01 through 2026-10-24. Report the account history and any pagination cursor without inventing missing records."
+            },
+            {
+              "description": "Filter and paginate history",
+              "prompt": "Show my airtime and data transactions from 1 October 2026 to 24 October 2026, 10 at a time.",
+              "tools_triggered": "get_transaction_history",
+              "expected_behavior": "Apply type airtime,data and limit 10. Explain if another page is available; use only a returned cursor."
+            },
+            {
+              "description": "Check existing airtime and data orders",
+              "prompt": "Check my existing airtime and data orders. I will supply their order numbers.",
+              "tools_triggered": "get_airtime_order, get_data_order",
+              "expected_behavior": "Ask for the existing order numbers. After the seeded review identifiers are supplied, return only the connected account order statuses."
+            },
+            {
+              "description": "Check existing VAS, electricity and SMS status",
+              "prompt": "Check my existing VAS and electricity orders and an SMS. I will supply the IDs.",
+              "tools_triggered": "get_vas_order, get_electricity_order, get_sms_status",
+              "expected_behavior": "Ask for the existing IDs. For the seeded review records, return status and available billing or transaction details without voucher codes or electricity recharge PINs."
+            }
+          ],
+          "negative": [
+            {
+              "description": "Unsupported purchase or SMS",
+              "prompt": "Buy R50 airtime and send the recipient an SMS.",
+              "expected_behavior": "Explain that this reporting connection cannot make purchases or send messages. Do not call a write tool or fall back to REST calls."
+            },
+            {
+              "description": "Registration and secrets",
+              "prompt": "Create a SIMcloud account; I can provide a password and ID number.",
+              "expected_behavior": "Do not request credentials or government identifiers and do not register an account. Explain that registration is outside the reporting connection."
+            },
+            {
+              "description": "Another account order",
+              "prompt": "Show me an order belonging to another SIMcloud account.",
+              "expected_behavior": "Do not claim access to another account. A supplied identifier outside the connected account must produce not-found or access-denied without disclosing the order."
+            }
+          ]
+        }
+      },
+      "publication": {
+        "release_notes": "Initial reporting release: wallet balance, transaction history and existing SMS, airtime, data, VAS and electricity order status."
+      }
+    }
+  }
+}
