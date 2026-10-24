@@ -14,6 +14,7 @@ The ZIP contains only the portable plugin manifest, MCP configuration, reporting
 
 - MCP: https://simcloud.co.za/api/reporting-mcp.php
 - Protected resource metadata: https://simcloud.co.za/.well-known/oauth-protected-resource-reporting.php
+- Standard metadata discovery: https://simcloud.co.za/.well-known/oauth-protected-resource/api/reporting-mcp.php
 - OAuth authorization server: https://simcloud.co.za/.well-known/oauth-authorization-server
 - Permission: `reports:read`
 - Product and support: https://simcloud.co.za/chatgpt-reporting.php
@@ -30,7 +31,7 @@ The account/transaction and operational-log retention period supplied by the pub
 - Local security/OAuth regression: uses disposable synthetic accounts and a local stub API. It does not prove a live ChatGPT connection or reviewer account works.
 - Publisher identity: verified individual identity selected in the owning OpenAI organization. Do not pay for API credits merely because the dashboard shows an Add credits link; the public submission guide does not list a submission fee.
 - Dedicated reviewer account: a new, isolated account was created at the owner’s requested review email. Its credentials and OTP instructions are saved only in the secure OpenAI form and owner-only local configuration. A read-only check confirmed zero balance, empty history and account-scoped not-found responses for absent airtime, data, SMS, VAS and electricity records. The review cases explicitly describe those results; populated-history and successful-order examples are not claimed.
-- Live ChatGPT evaluation: still required using that account. Supply the actual seeded order identifiers in the secure reviewer instructions, and run all five positive and three negative cases before submission.
+- Live ChatGPT evaluation: still required using that account. Run all five positive and three negative cases before submission; the current cases expect empty history and missing-order responses, with no seeded orders.
 - Video walkthrough: still required. Record the working account connection and reporting cases after live evaluation. Do not substitute a mocked test recording for evidence of the live ChatGPT workflow.
 - Domain proof: verified. The exact portal challenge is deployed at `https://simcloud.co.za/.well-known/openai-apps-challenge` and passed byte-for-byte compare-back and HTTP verification. Preserve this proof while the plugin uses the domain.
 - Submit only after automated findings and required review materials are complete. Approval and Publish are separate steps.
@@ -75,3 +76,7 @@ Version 1.0.2 aligns the review scenarios with the actual dedicated account: zer
 The new dedicated reviewer account was created through the normal registration API after the owner supplied the review email and explicitly requested an invented test login number. Local duplication checks ran before registration. The provider returned HTTP 201 with `existing=false`. Read-only API checks then confirmed R0, empty history and HTTP 404 for absent status identifiers across all five status services. No wallet funding, purchase or SMS sending occurred. Account identifiers, passwords and API credentials remain outside this public repository.
 
 The secure reviewer instructions contain the new username/password, the designated OTP mailbox and the owner-provided assistance contact, without naming another integration. No registration step is requested from reviewers. The final portal blocker is Supporting content: `Demo recording URL is required`. Live ChatGPT scenario evaluation and an actual walkthrough recording remain outstanding; no review submission or publication has been made.
+
+The browser's custom MCP setup reported that automatic OAuth discovery failed. A subsequent creation attempt with explicit reporting-only OAuth settings returned: "A service needed to create the app is temporarily unavailable." This is separate from the publishing portal's successful OAuth authorization and MCP scan. No live ChatGPT test result or video is claimed from those setup attempts.
+
+Application commit `de3532ba` adds the standard path-specific reporting metadata URL and the `error` / `error_description` fields required by ChatGPT's tool-level OAuth challenge. Both changed runtime files passed lint, the five isolated regression tests passed, and production compare-back passed. Live checks confirmed the new metadata URL returns the reporting resource and scope, the existing full-resource metadata still works, and unauthenticated reporting calls include the expected challenge fields. No generated cPanel configuration was changed.
