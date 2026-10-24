@@ -27,11 +27,12 @@ The account/transaction and operational-log retention period supplied by the pub
 
 ## Review status and remaining work
 
+- Current portal status: version **1.0.2 is In review**. Submission was accepted on 24 October 2026 after the owner approved the six legal/policy attestations. Publication remains **Not published** pending OpenAI's review decision.
 - Package and review scenarios: prepared. Five positive and three negative cases are embedded in the manifest.
 - Local security/OAuth regression: uses disposable synthetic accounts and a local stub API. It does not prove a live ChatGPT connection or reviewer account works.
 - Publisher identity: verified individual identity selected in the owning OpenAI organization. Do not pay for API credits merely because the dashboard shows an Add credits link; the public submission guide does not list a submission fee.
 - Dedicated reviewer account: a new, isolated account was created at the owner’s requested review email. Its credentials and OTP instructions are saved only in the secure OpenAI form and owner-only local configuration. A read-only check confirmed zero balance, empty history and account-scoped not-found responses for absent airtime, data, SMS, VAS and electricity records. The review cases explicitly describe those results; populated-history and successful-order examples are not claimed.
-- Live ChatGPT evaluation: still required using that account. Run all five positive and three negative cases before submission; the current cases expect empty history and missing-order responses, with no seeded orders.
+- Conversational ChatGPT evaluation: unverified, as disclosed in the private submission context. The live protocol checks used the dedicated account and confirmed all five positive cases and three server boundary cases. The current cases expect empty history and missing-order responses, with no seeded orders.
 - Video walkthrough: prepared and saved in OpenAI's review form at https://simcloud.co.za/chatgpt-reporting-review.php. It shows actual reporting MCP requests and responses from the dedicated account, with the client and testing limitations disclosed. It does not claim a ChatGPT conversation or interactive login demonstration.
 - Domain proof: verified. The exact portal challenge is deployed at `https://simcloud.co.za/.well-known/openai-apps-challenge` and passed byte-for-byte compare-back and HTTP verification. Preserve this proof while the plugin uses the domain.
 - Submit only after automated findings and required review materials are complete. Approval and Publish are separate steps.
@@ -82,6 +83,10 @@ That initial video blocker is now resolved. A 110-second walkthrough was assembl
 The walkthrough used a temporary, reporting-only authorization for the dedicated review account. The token was revoked and its temporary client disabled after capture; a live request verified rejection of the revoked token, and the local bearer file was removed. Account login and OTP settings were unchanged. No production financial records or purchases were created.
 
 Application commit `0095696e` adds the review page and video. PHP lint, full video decoding, production byte-for-byte compare-back, HTTP video range requests and browser playback metadata checks passed. OpenAI saved the video URL and cleared the incomplete-review-information finding. Final submission still requires the displayed legal and policy attestations, followed by review approval before publication.
+
+## Submission accepted - 24 October 2026
+
+The owner explicitly approved accepting the six displayed OpenAI attestations and submitting the plugin. The form was submitted with the hosted walkthrough, existing secure reviewer credentials and a private note explaining the protocol testing and unverified conversational/login flow. OpenAI redirected to the plugin list showing In review / Pending review. The plugin details confirm **Metadata & skills version 1.0.2 · In review** and **Publication Not published**. The plugin is submitted; review approval and directory publication have not yet occurred. Do not cancel this review or upload a replacement draft merely to change this status documentation.
 
 The browser's custom MCP setup reported that automatic OAuth discovery failed. A subsequent creation attempt with explicit reporting-only OAuth settings returned: "A service needed to create the app is temporarily unavailable." This is separate from the publishing portal's successful OAuth authorization and MCP scan. No live ChatGPT test result or video is claimed from those setup attempts.
 
