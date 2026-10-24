@@ -1,6 +1,6 @@
 # SIMcloud reporting plugin publication
 
-The public package is `plugins/simcloud-reporting`, version 1.0.0. It is separate from the existing full-access Codex plugin. Its display name is SIMcloud and its subtitle is “Account reports and status”.
+The public package is `plugins/simcloud-reporting`, version 1.0.2. It is separate from the existing full-access Codex plugin. Its display name is SIMcloud and its subtitle is “Account reports and status”.
 
 Build the submission archive with:
 
@@ -8,7 +8,7 @@ Build the submission archive with:
 python3 scripts/package_reporting.py
 ```
 
-The ZIP contains only the portable plugin manifest, MCP configuration, reporting skill and square SVG icon. No application source, API token, reviewer credential, customer export or full-access OpenAPI reference belongs in it. The portable MCP configuration follows OpenAI’s documented `extensions.com.openai.auth` convention. The upstream Agent Plugins MCP schema currently rejects that extension; validate the base transport fields against that schema and use the OpenAI portal for final extension validation.
+The ZIP contains only the portable plugin manifest, MCP configuration, reporting skill and square SVG icon. No application source, API token, reviewer credential, customer export or full-access OpenAPI reference belongs in it. The portable MCP configuration follows OpenAI’s documented `extensions.com.openai.auth` convention. OpenAI’s portal accepted the package and displayed the expected DCR, reporting resource and reporting-scope settings. The standalone upstream Agent Plugins MCP schema does not describe this OpenAI extension.
 
 ## Hosted requirements
 
@@ -28,11 +28,11 @@ The account/transaction and operational-log retention period supplied by the pub
 
 - Package and review scenarios: prepared. Five positive and three negative cases are embedded in the manifest.
 - Local security/OAuth regression: uses disposable synthetic accounts and a local stub API. It does not prove a live ChatGPT connection or reviewer account works.
-- Publisher identity: must be verified in the OpenAI organization that owns the submission. Do not pay for API credits merely because the dashboard shows an Add credits link; the public submission guide does not list a submission fee.
-- Dedicated reviewer account: still required. It must contain sample account history and existing order/SMS records corresponding to the review cases, without real customer data. Do not insert synthetic records into production wallet, payment, invoice or provider queues just to populate a demo. A suitable existing isolated test account or properly separated test dataset is needed.
+- Publisher identity: verified individual identity selected in the owning OpenAI organization. Do not pay for API credits merely because the dashboard shows an Add credits link; the public submission guide does not list a submission fee.
+- Dedicated reviewer account: a new, isolated account was created at the owner’s requested review email. Its credentials and OTP instructions are saved only in the secure OpenAI form and owner-only local configuration. A read-only check confirmed zero balance, empty history and account-scoped not-found responses for absent airtime, data, SMS, VAS and electricity records. The review cases explicitly describe those results; populated-history and successful-order examples are not claimed.
 - Live ChatGPT evaluation: still required using that account. Supply the actual seeded order identifiers in the secure reviewer instructions, and run all five positive and three negative cases before submission.
 - Video walkthrough: still required. Record the working account connection and reporting cases after live evaluation. Do not substitute a mocked test recording for evidence of the live ChatGPT workflow.
-- Domain proof: host the exact token shown by the portal at the exact challenge URL. Do not invent a token or replace a proof used by another plugin.
+- Domain proof: verified. The exact portal challenge is deployed at `https://simcloud.co.za/.well-known/openai-apps-challenge` and passed byte-for-byte compare-back and HTTP verification. Preserve this proof while the plugin uses the domain.
 - Submit only after automated findings and required review materials are complete. Approval and Publish are separate steps.
 
 Reviewer login details go in the secure dashboard fields. Do not commit them or place them in the ZIP. The package deliberately omits a demo video URL until a real recording exists.
@@ -53,6 +53,21 @@ The reporting runtime and public support/privacy pages are deployed. The nine-fi
 - Live direct calls to all ten excluded full-access tool names were rejected. An unauthenticated balance request returned a reporting OAuth challenge. These checks used no account credentials and did not purchase products or change account data.
 - The existing full endpoint still advertises 17 tools with valid JSON schemas.
 - Support, privacy and OAuth metadata URLs return HTTP 200. The privacy policy contains the publisher-provided three-year record/log retention period.
-- The OpenAI upload dialog currently blocks package creation/upload with “You need a verified developer identity before you can create or upload a plugin.” No ZIP has been uploaded, no OpenAI automated package scan has run, and no review submission or publication has occurred.
+- The original upload block was cleared after identity verification. Version 1.0.1 is uploaded as a draft. The initial Business category was rejected; Productivity removed the blocking category finding, with a non-blocking category recommendation still displayed. Domain ownership is verified. Review submission and publication have not occurred.
 
-Live account connection and the five positive/three negative ChatGPT scenarios remain unverified until a dedicated sample-data reviewer account is available. No paid OpenAI API calls, API credit purchase or submission payment was made during this work.
+An owner-authorized live OAuth connection completed successfully in the OpenAI portal. This establishes authorization and discovery setup; the five positive/three negative ChatGPT scenarios and reviewer-account readiness remain unverified. No paid OpenAI API calls, API credit purchase or submission payment was made during this work.
+
+## OpenAI draft
+
+- [Manage the SIMcloud draft](https://platform.openai.com/plugins/manage/plugin_asdk_app_6adcde772fe48191b7e5a2f01340ec2d)
+- Plugin ID: `plugin_asdk_app_6adcde772fe48191b7e5a2f01340ec2d`.
+- Associated MCP app ID: `asdk_app_6adcde772fe48191b7e5a2f01340ec2d`.
+- Draft package version: 1.0.2 (prepared for upload).
+- Publisher verification is individual, not business verification.
+- Dedicated reviewer credentials and OTP sign-in instructions are saved privately. OTPs go to the designated review email, with the owner’s supplied contact for assistance. Live ChatGPT scenarios and the walkthrough recording remain outstanding. Never mark draft upload, domain verification or an in-progress automated check as review approval or publication.
+
+The live connection used the owner’s signed-in account only after explicit authorization. The owner’s password was not placed in the reviewer fields, package or repository. The original test-account email settings were not changed; the newly created reviewer account uses the owner-specified review email. The database OTP check confirmed a one-way password hash rather than a plaintext code; no OTP protection or challenge record was altered.
+
+The OpenAI portal completed discovery of all seven reporting tools and marked the MCP configuration Configured. The latest MCP scan reported no findings, and the bundled skill checks passed. A non-blocking category recommendation remains. Review status is Not submitted and publication is Not published.
+
+Version 1.0.2 aligns the review scenarios with the actual dedicated account: zero balance, empty history, filtered empty history, and account-scoped not-found status responses. No synthetic production financial or provider records were created to populate the account. Successful delivery and populated account-history examples remain unverified in this review account.

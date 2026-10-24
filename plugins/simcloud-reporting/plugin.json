@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "simcloud-reporting",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Read your SIMcloud balance, transaction history and existing order status.",
   "author": {
     "name": "SIMcloud",
@@ -53,31 +53,31 @@
               "description": "Read wallet balance",
               "prompt": "Check my SIMcloud wallet balance.",
               "tools_triggered": "get_wallet_balance",
-              "expected_behavior": "Return the connected review account balance in rand and its stored update time. Do not transfer funds."
+              "expected_behavior": "Return the dedicated review account balance of R0 in South African rand and its stored update time. Do not transfer funds."
             },
             {
               "description": "Read transaction history",
               "prompt": "Show my SIMcloud transactions from 1 October 2026 to 24 October 2026.",
               "tools_triggered": "get_transaction_history",
-              "expected_behavior": "Use 2026-10-01 through 2026-10-24. Report the account history and any pagination cursor without inventing missing records."
+              "expected_behavior": "Use 2026-10-01 through 2026-10-24. The dedicated account has no transactions: report an empty history without inventing records."
             },
             {
               "description": "Filter and paginate history",
               "prompt": "Show my airtime and data transactions from 1 October 2026 to 24 October 2026, 10 at a time.",
               "tools_triggered": "get_transaction_history",
-              "expected_behavior": "Apply type airtime,data and limit 10. Explain if another page is available; use only a returned cursor."
+              "expected_behavior": "Apply type airtime,data and limit 10. The dedicated account returns an empty list and no next-page cursor; do not invent further pages."
             },
             {
-              "description": "Check existing airtime and data orders",
-              "prompt": "Check my existing airtime and data orders. I will supply their order numbers.",
+              "description": "Handle missing airtime and data requests safely",
+              "prompt": "Check airtime request 1 and data request 1 in my SIMcloud account.",
               "tools_triggered": "get_airtime_order, get_data_order",
-              "expected_behavior": "Ask for the existing order numbers. After the seeded review identifiers are supplied, return only the connected account order statuses."
+              "expected_behavior": "Both identifiers are absent from the dedicated review account. Report not-found for each HTTP 404 result without exposing another account or claiming delivery."
             },
             {
-              "description": "Check existing VAS, electricity and SMS status",
-              "prompt": "Check my existing VAS and electricity orders and an SMS. I will supply the IDs.",
+              "description": "Handle missing VAS, electricity and SMS records safely",
+              "prompt": "Check VAS order 1, electricity order 1 and SMS 1 in my SIMcloud account.",
               "tools_triggered": "get_vas_order, get_electricity_order, get_sms_status",
-              "expected_behavior": "Ask for the existing IDs. For the seeded review records, return status and available billing or transaction details without voucher codes or electricity recharge PINs."
+              "expected_behavior": "These records are absent from the dedicated review account. Report each HTTP 404 not-found result accurately. Do not expose another account or invent codes, status or billing details."
             }
           ],
           "negative": [
