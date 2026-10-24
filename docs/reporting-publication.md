@@ -42,3 +42,17 @@ Reviewer login details go in the secure dashboard fields. Do not commit them or 
 - [Package format and OAuth configuration](https://developers.openai.com/plugins/build/plugins)
 - [Submission and publication](https://developers.openai.com/plugins/deploy/submission)
 - [Plugin guidelines](https://developers.openai.com/plugins/plugin-guidelines)
+
+## Deployment and validation checkpoint - 24 October 2026
+
+The reporting runtime and public support/privacy pages are deployed. The nine-file production manifest passed byte-for-byte compare-back verification. A subsequent one-file deployment corrected empty input-schema properties and passed compare-back too.
+
+- Application commits: `0ae2f471` and `485c7a3c`, pushed to `ErikThiart/simcloud`.
+- All nine changed runtime PHP files passed syntax checks with PHP 8.4.17. The five isolated HTTP/OAuth regression tests passed. PHP 8.5 was not available as a local test binary; the touched cURL path no longer calls deprecated `curl_close()`.
+- Live reporting discovery advertises exactly seven tools, each with valid input and output JSON schemas, read-only annotations and `reports:read` security metadata.
+- Live direct calls to all ten excluded full-access tool names were rejected. An unauthenticated balance request returned a reporting OAuth challenge. These checks used no account credentials and did not purchase products or change account data.
+- The existing full endpoint still advertises 17 tools with valid JSON schemas.
+- Support, privacy and OAuth metadata URLs return HTTP 200. The privacy policy contains the publisher-provided three-year record/log retention period.
+- The OpenAI upload dialog currently blocks package creation/upload with “You need a verified developer identity before you can create or upload a plugin.” No ZIP has been uploaded, no OpenAI automated package scan has run, and no review submission or publication has occurred.
+
+Live account connection and the five positive/three negative ChatGPT scenarios remain unverified until a dedicated sample-data reviewer account is available. No paid OpenAI API calls, API credit purchase or submission payment was made during this work.
