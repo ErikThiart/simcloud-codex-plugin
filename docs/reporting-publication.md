@@ -53,7 +53,7 @@ The reporting runtime and public support/privacy pages are deployed. The nine-fi
 - Live direct calls to all ten excluded full-access tool names were rejected. An unauthenticated balance request returned a reporting OAuth challenge. These checks used no account credentials and did not purchase products or change account data.
 - The existing full endpoint still advertises 17 tools with valid JSON schemas.
 - Support, privacy and OAuth metadata URLs return HTTP 200. The privacy policy contains the publisher-provided three-year record/log retention period.
-- The original upload block was cleared after identity verification. Version 1.0.1 is uploaded as a draft. The initial Business category was rejected; Productivity removed the blocking category finding, with a non-blocking category recommendation still displayed. Domain ownership is verified. Review submission and publication have not occurred.
+- The original upload block was cleared after identity verification. Version 1.0.1 is uploaded as a draft. The initial Business category was rejected; Productivity removed the blocking category finding, and the later 1.0.2 upload cleared the remaining metadata recommendation. Domain ownership is verified. Review submission and publication have not occurred.
 
 An owner-authorized live OAuth connection completed successfully in the OpenAI portal. This establishes authorization and discovery setup; the five positive/three negative ChatGPT scenarios and reviewer-account readiness remain unverified. No paid OpenAI API calls, API credit purchase or submission payment was made during this work.
 
@@ -62,12 +62,16 @@ An owner-authorized live OAuth connection completed successfully in the OpenAI p
 - [Manage the SIMcloud draft](https://platform.openai.com/plugins/manage/plugin_asdk_app_6adcde772fe48191b7e5a2f01340ec2d)
 - Plugin ID: `plugin_asdk_app_6adcde772fe48191b7e5a2f01340ec2d`.
 - Associated MCP app ID: `asdk_app_6adcde772fe48191b7e5a2f01340ec2d`.
-- Draft package version: 1.0.2 (prepared for upload).
+- Draft package version: 1.0.2, uploaded.
 - Publisher verification is individual, not business verification.
 - Dedicated reviewer credentials and OTP sign-in instructions are saved privately. OTPs go to the designated review email, with the owner’s supplied contact for assistance. Live ChatGPT scenarios and the walkthrough recording remain outstanding. Never mark draft upload, domain verification or an in-progress automated check as review approval or publication.
 
 The live connection used the owner’s signed-in account only after explicit authorization. The owner’s password was not placed in the reviewer fields, package or repository. The original test-account email settings were not changed; the newly created reviewer account uses the owner-specified review email. The database OTP check confirmed a one-way password hash rather than a plaintext code; no OTP protection or challenge record was altered.
 
-The OpenAI portal completed discovery of all seven reporting tools and marked the MCP configuration Configured. The latest MCP scan reported no findings, and the bundled skill checks passed. A non-blocking category recommendation remains. Review status is Not submitted and publication is Not published.
+The OpenAI portal completed discovery of all seven reporting tools and marked the MCP configuration Configured. The latest MCP scan reported no findings, and the bundled skill checks passed. Version 1.0.2 shows no metadata findings; the earlier non-blocking category recommendation cleared. Review status is Not submitted and publication is Not published.
 
 Version 1.0.2 aligns the review scenarios with the actual dedicated account: zero balance, empty history, filtered empty history, and account-scoped not-found status responses. No synthetic production financial or provider records were created to populate the account. Successful delivery and populated account-history examples remain unverified in this review account.
+
+The new dedicated reviewer account was created through the normal registration API after the owner supplied the review email and explicitly requested an invented test login number. Local duplication checks ran before registration. The provider returned HTTP 201 with `existing=false`. Read-only API checks then confirmed R0, empty history and HTTP 404 for absent status identifiers across all five status services. No wallet funding, purchase or SMS sending occurred. Account identifiers, passwords and API credentials remain outside this public repository.
+
+The secure reviewer instructions contain the new username/password, the designated OTP mailbox and the owner-provided assistance contact, without naming another integration. No registration step is requested from reviewers. The final portal blocker is Supporting content: `Demo recording URL is required`. Live ChatGPT scenario evaluation and an actual walkthrough recording remain outstanding; no review submission or publication has been made.
